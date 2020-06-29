@@ -1,0 +1,533 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Materiel_NoScan_V2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="JDJS_WMS_Device_Alarm_History_Table">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CncID" Type="int" />
+          <Property Name="ErrCode" Type="varchar(max)" />
+          <Property Name="ErrDesc" Type="varchar(max)" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="JDJS_WMS_Device_Brand_Info">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Brand" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JDJS_WMS_Device_Info">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MachNum" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IP" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MachState" Type="varchar" MaxLength="50" />
+          <Property Name="MachType" Type="int" Nullable="false" />
+          <Property Name="Position" Type="int" />
+        </EntityType>
+        <EntityType Name="JDJS_WMS_Device_ProgState_Info">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CncID" Type="int" />
+          <Property Name="ProgState" Type="int" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="JDJS_WMS_Device_RealTime_Data">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MachCoord_X" Type="float" />
+          <Property Name="MachCoord_Y" Type="float" />
+          <Property Name="MachCoord_Z" Type="float" />
+          <Property Name="MachCoord_A" Type="float" />
+          <Property Name="MachCoord_B" Type="float" />
+          <Property Name="MachCoord_C" Type="float" />
+          <Property Name="AbsCoord_X" Type="float" />
+          <Property Name="AbsCoord_Y" Type="float" />
+          <Property Name="AbsCoord_Z" Type="float" />
+          <Property Name="AbsCoord_A" Type="float" />
+          <Property Name="AbsCoord_B" Type="float" />
+          <Property Name="AbsCoord_C" Type="float" />
+          <Property Name="RelCoord_X" Type="float" />
+          <Property Name="RelCoord_Y" Type="float" />
+          <Property Name="RelCoord_Z" Type="float" />
+          <Property Name="RelCoord_A" Type="float" />
+          <Property Name="RelCoord_B" Type="float" />
+          <Property Name="RelCoord_C" Type="float" />
+          <Property Name="ProgState" Type="int" />
+          <Property Name="CurrWCoord" Type="int" />
+          <Property Name="FeedRate" Type="float" />
+          <Property Name="SpindleSpeed" Type="int" />
+          <Property Name="ToolNo" Type="int" />
+          <Property Name="MachTime" Type="float" />
+          <Property Name="CurrO" Type="int" />
+          <Property Name="CurrOMainO" Type="int" />
+          <Property Name="CountNum" Type="int" />
+          <Property Name="SpindleRate" Type="int" />
+          <Property Name="Rate" Type="int" />
+          <Property Name="SInfo_A" Type="float" />
+          <Property Name="SInfo_NM" Type="float" />
+          <Property Name="SInfo_W" Type="float" />
+          <Property Name="CurLineNo" Type="int" />
+          <Property Name="CurLineText" Type="text" />
+          <Property Name="Time_Y" Type="int" />
+          <Property Name="Time_M" Type="int" />
+          <Property Name="Time_D" Type="int" />
+          <Property Name="Time_H" Type="int" />
+          <Property Name="Time_MIT" Type="int" />
+          <Property Name="Time_S" Type="int" />
+          <Property Name="Time_zone" Type="int" />
+          <Property Name="Mode" Type="int" />
+          <Property Name="CncID" Type="int" />
+        </EntityType>
+        <EntityType Name="JDJS_WMS_Device_Type_Info">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BrandID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__JDJS_WMS___CncID__09746778">
+          <End Role="JDJS_WMS_Device_Info" Type="Self.JDJS_WMS_Device_Info" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="JDJS_WMS_Device_Alarm_History_Table" Type="Self.JDJS_WMS_Device_Alarm_History_Table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JDJS_WMS_Device_Info">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JDJS_WMS_Device_Alarm_History_Table">
+              <PropertyRef Name="CncID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JDJS_WMS_Device_Brand_Info_JDJS_WMS_Device_Brand_Info">
+          <End Role="JDJS_WMS_Device_Brand_Info" Type="Self.JDJS_WMS_Device_Brand_Info" Multiplicity="1" />
+          <End Role="JDJS_WMS_Device_Brand_Info1" Type="Self.JDJS_WMS_Device_Brand_Info" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="JDJS_WMS_Device_Brand_Info">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JDJS_WMS_Device_Brand_Info1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JDJS_WMS_Device_ProgState_Info_JDJS_WMS_Device_Info">
+          <End Role="JDJS_WMS_Device_Info" Type="Self.JDJS_WMS_Device_Info" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="JDJS_WMS_Device_ProgState_Info" Type="Self.JDJS_WMS_Device_ProgState_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JDJS_WMS_Device_Info">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JDJS_WMS_Device_ProgState_Info">
+              <PropertyRef Name="CncID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JDJS_WMS_Device_RealTime_Data_JDJS_WMS_Device_Info">
+          <End Role="JDJS_WMS_Device_Info" Type="Self.JDJS_WMS_Device_Info" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="JDJS_WMS_Device_RealTime_Data" Type="Self.JDJS_WMS_Device_RealTime_Data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JDJS_WMS_Device_Info">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JDJS_WMS_Device_RealTime_Data">
+              <PropertyRef Name="CncID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JDJS_WMS_Device_Type_Info_JDJS_WMS_Device_Brand_Info">
+          <End Role="JDJS_WMS_Device_Brand_Info" Type="Self.JDJS_WMS_Device_Brand_Info" Multiplicity="1" />
+          <End Role="JDJS_WMS_Device_Type_Info" Type="Self.JDJS_WMS_Device_Type_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JDJS_WMS_Device_Brand_Info">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JDJS_WMS_Device_Type_Info">
+              <PropertyRef Name="BrandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Materiel_NoScan_V2ModelStoreContainer">
+          <EntitySet Name="JDJS_WMS_Device_Alarm_History_Table" EntityType="Self.JDJS_WMS_Device_Alarm_History_Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JDJS_WMS_Device_Brand_Info" EntityType="Self.JDJS_WMS_Device_Brand_Info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JDJS_WMS_Device_Info" EntityType="Self.JDJS_WMS_Device_Info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JDJS_WMS_Device_ProgState_Info" EntityType="Self.JDJS_WMS_Device_ProgState_Info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JDJS_WMS_Device_RealTime_Data" EntityType="Self.JDJS_WMS_Device_RealTime_Data" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JDJS_WMS_Device_Type_Info" EntityType="Self.JDJS_WMS_Device_Type_Info" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__JDJS_WMS___CncID__09746778" Association="Self.FK__JDJS_WMS___CncID__09746778">
+            <End Role="JDJS_WMS_Device_Info" EntitySet="JDJS_WMS_Device_Info" />
+            <End Role="JDJS_WMS_Device_Alarm_History_Table" EntitySet="JDJS_WMS_Device_Alarm_History_Table" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JDJS_WMS_Device_Brand_Info_JDJS_WMS_Device_Brand_Info" Association="Self.FK_JDJS_WMS_Device_Brand_Info_JDJS_WMS_Device_Brand_Info">
+            <End Role="JDJS_WMS_Device_Brand_Info" EntitySet="JDJS_WMS_Device_Brand_Info" />
+            <End Role="JDJS_WMS_Device_Brand_Info1" EntitySet="JDJS_WMS_Device_Brand_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JDJS_WMS_Device_ProgState_Info_JDJS_WMS_Device_Info" Association="Self.FK_JDJS_WMS_Device_ProgState_Info_JDJS_WMS_Device_Info">
+            <End Role="JDJS_WMS_Device_Info" EntitySet="JDJS_WMS_Device_Info" />
+            <End Role="JDJS_WMS_Device_ProgState_Info" EntitySet="JDJS_WMS_Device_ProgState_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JDJS_WMS_Device_RealTime_Data_JDJS_WMS_Device_Info" Association="Self.FK_JDJS_WMS_Device_RealTime_Data_JDJS_WMS_Device_Info">
+            <End Role="JDJS_WMS_Device_Info" EntitySet="JDJS_WMS_Device_Info" />
+            <End Role="JDJS_WMS_Device_RealTime_Data" EntitySet="JDJS_WMS_Device_RealTime_Data" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JDJS_WMS_Device_Type_Info_JDJS_WMS_Device_Brand_Info" Association="Self.FK_JDJS_WMS_Device_Type_Info_JDJS_WMS_Device_Brand_Info">
+            <End Role="JDJS_WMS_Device_Brand_Info" EntitySet="JDJS_WMS_Device_Brand_Info" />
+            <End Role="JDJS_WMS_Device_Type_Info" EntitySet="JDJS_WMS_Device_Type_Info" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Materiel_NoScan_V2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="JDJS_WMS_Device_Brand_Info">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="JDJS_WMS_Device_Brand_Info1" Relationship="Self.FK_JDJS_WMS_Device_Brand_Info_JDJS_WMS_Device_Brand_Info" FromRole="JDJS_WMS_Device_Brand_Info" ToRole="JDJS_WMS_Device_Brand_Info1" />
+          <NavigationProperty Name="JDJS_WMS_Device_Brand_Info2" Relationship="Self.FK_JDJS_WMS_Device_Brand_Info_JDJS_WMS_Device_Brand_Info" FromRole="JDJS_WMS_Device_Brand_Info1" ToRole="JDJS_WMS_Device_Brand_Info" />
+          <NavigationProperty Name="JDJS_WMS_Device_Type_Info" Relationship="Self.FK_JDJS_WMS_Device_Type_Info_JDJS_WMS_Device_Brand_Info" FromRole="JDJS_WMS_Device_Brand_Info" ToRole="JDJS_WMS_Device_Type_Info" />
+        </EntityType>
+        <EntityType Name="JDJS_WMS_Device_Info">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MachNum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MachState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MachType" Type="Int32" Nullable="false" />
+          <Property Name="Position" Type="Int32" />
+          <NavigationProperty Name="JDJS_WMS_Device_ProgState_Info" Relationship="Self.FK_JDJS_WMS_Device_ProgState_Info_JDJS_WMS_Device_Info" FromRole="JDJS_WMS_Device_Info" ToRole="JDJS_WMS_Device_ProgState_Info" />
+          <NavigationProperty Name="JDJS_WMS_Device_RealTime_Data" Relationship="Self.FK_JDJS_WMS_Device_RealTime_Data_JDJS_WMS_Device_Info" FromRole="JDJS_WMS_Device_Info" ToRole="JDJS_WMS_Device_RealTime_Data" />
+          <NavigationProperty Name="JDJS_WMS_Device_Alarm_History_Table" Relationship="Materiel_NoScan_V2Model.FK__JDJS_WMS___CncID__09746778" FromRole="JDJS_WMS_Device_Info" ToRole="JDJS_WMS_Device_Alarm_History_Table" />
+        </EntityType>
+        <EntityType Name="JDJS_WMS_Device_ProgState_Info">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CncID" Type="Int32" />
+          <Property Name="ProgState" Type="Int32" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="JDJS_WMS_Device_Info" Relationship="Self.FK_JDJS_WMS_Device_ProgState_Info_JDJS_WMS_Device_Info" FromRole="JDJS_WMS_Device_ProgState_Info" ToRole="JDJS_WMS_Device_Info" />
+        </EntityType>
+        <EntityType Name="JDJS_WMS_Device_RealTime_Data">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MachCoord_X" Type="Double" />
+          <Property Name="MachCoord_Y" Type="Double" />
+          <Property Name="MachCoord_Z" Type="Double" />
+          <Property Name="MachCoord_A" Type="Double" />
+          <Property Name="MachCoord_B" Type="Double" />
+          <Property Name="MachCoord_C" Type="Double" />
+          <Property Name="AbsCoord_X" Type="Double" />
+          <Property Name="AbsCoord_Y" Type="Double" />
+          <Property Name="AbsCoord_Z" Type="Double" />
+          <Property Name="AbsCoord_A" Type="Double" />
+          <Property Name="AbsCoord_B" Type="Double" />
+          <Property Name="AbsCoord_C" Type="Double" />
+          <Property Name="RelCoord_X" Type="Double" />
+          <Property Name="RelCoord_Y" Type="Double" />
+          <Property Name="RelCoord_Z" Type="Double" />
+          <Property Name="RelCoord_A" Type="Double" />
+          <Property Name="RelCoord_B" Type="Double" />
+          <Property Name="RelCoord_C" Type="Double" />
+          <Property Name="ProgState" Type="Int32" />
+          <Property Name="CurrWCoord" Type="Int32" />
+          <Property Name="FeedRate" Type="Double" />
+          <Property Name="SpindleSpeed" Type="Int32" />
+          <Property Name="ToolNo" Type="Int32" />
+          <Property Name="MachTime" Type="Double" />
+          <Property Name="CurrO" Type="Int32" />
+          <Property Name="CurrOMainO" Type="Int32" />
+          <Property Name="CountNum" Type="Int32" />
+          <Property Name="SpindleRate" Type="Int32" />
+          <Property Name="Rate" Type="Int32" />
+          <Property Name="SInfo_A" Type="Double" />
+          <Property Name="SInfo_NM" Type="Double" />
+          <Property Name="SInfo_W" Type="Double" />
+          <Property Name="CurLineNo" Type="Int32" />
+          <Property Name="CurLineText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Time_Y" Type="Int32" />
+          <Property Name="Time_M" Type="Int32" />
+          <Property Name="Time_D" Type="Int32" />
+          <Property Name="Time_H" Type="Int32" />
+          <Property Name="Time_MIT" Type="Int32" />
+          <Property Name="Time_S" Type="Int32" />
+          <Property Name="Time_zone" Type="Int32" />
+          <Property Name="Mode" Type="Int32" />
+          <Property Name="CncID" Type="Int32" />
+          <NavigationProperty Name="JDJS_WMS_Device_Info" Relationship="Self.FK_JDJS_WMS_Device_RealTime_Data_JDJS_WMS_Device_Info" FromRole="JDJS_WMS_Device_RealTime_Data" ToRole="JDJS_WMS_Device_Info" />
+        </EntityType>
+        <EntityType Name="JDJS_WMS_Device_Type_Info">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BrandID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="JDJS_WMS_Device_Brand_Info" Relationship="Self.FK_JDJS_WMS_Device_Type_Info_JDJS_WMS_Device_Brand_Info" FromRole="JDJS_WMS_Device_Type_Info" ToRole="JDJS_WMS_Device_Brand_Info" />
+        </EntityType>
+        <Association Name="FK_JDJS_WMS_Device_Brand_Info_JDJS_WMS_Device_Brand_Info">
+          <End Role="JDJS_WMS_Device_Brand_Info" Type="Self.JDJS_WMS_Device_Brand_Info" Multiplicity="1" />
+          <End Role="JDJS_WMS_Device_Brand_Info1" Type="Self.JDJS_WMS_Device_Brand_Info" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="JDJS_WMS_Device_Brand_Info">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JDJS_WMS_Device_Brand_Info1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JDJS_WMS_Device_Type_Info_JDJS_WMS_Device_Brand_Info">
+          <End Role="JDJS_WMS_Device_Brand_Info" Type="Self.JDJS_WMS_Device_Brand_Info" Multiplicity="1" />
+          <End Role="JDJS_WMS_Device_Type_Info" Type="Self.JDJS_WMS_Device_Type_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JDJS_WMS_Device_Brand_Info">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JDJS_WMS_Device_Type_Info">
+              <PropertyRef Name="BrandID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JDJS_WMS_Device_ProgState_Info_JDJS_WMS_Device_Info">
+          <End Role="JDJS_WMS_Device_Info" Type="Self.JDJS_WMS_Device_Info" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="JDJS_WMS_Device_ProgState_Info" Type="Self.JDJS_WMS_Device_ProgState_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JDJS_WMS_Device_Info">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JDJS_WMS_Device_ProgState_Info">
+              <PropertyRef Name="CncID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JDJS_WMS_Device_RealTime_Data_JDJS_WMS_Device_Info">
+          <End Role="JDJS_WMS_Device_Info" Type="Self.JDJS_WMS_Device_Info" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="JDJS_WMS_Device_RealTime_Data" Type="Self.JDJS_WMS_Device_RealTime_Data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JDJS_WMS_Device_Info">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JDJS_WMS_Device_RealTime_Data">
+              <PropertyRef Name="CncID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Materiel_NoScan_V2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="JDJS_WMS_Device_Brand_Info" EntityType="Self.JDJS_WMS_Device_Brand_Info" />
+          <EntitySet Name="JDJS_WMS_Device_Info" EntityType="Self.JDJS_WMS_Device_Info" />
+          <EntitySet Name="JDJS_WMS_Device_ProgState_Info" EntityType="Self.JDJS_WMS_Device_ProgState_Info" />
+          <EntitySet Name="JDJS_WMS_Device_RealTime_Data" EntityType="Self.JDJS_WMS_Device_RealTime_Data" />
+          <EntitySet Name="JDJS_WMS_Device_Type_Info" EntityType="Self.JDJS_WMS_Device_Type_Info" />
+          <AssociationSet Name="FK_JDJS_WMS_Device_Brand_Info_JDJS_WMS_Device_Brand_Info" Association="Self.FK_JDJS_WMS_Device_Brand_Info_JDJS_WMS_Device_Brand_Info">
+            <End Role="JDJS_WMS_Device_Brand_Info" EntitySet="JDJS_WMS_Device_Brand_Info" />
+            <End Role="JDJS_WMS_Device_Brand_Info1" EntitySet="JDJS_WMS_Device_Brand_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JDJS_WMS_Device_Type_Info_JDJS_WMS_Device_Brand_Info" Association="Self.FK_JDJS_WMS_Device_Type_Info_JDJS_WMS_Device_Brand_Info">
+            <End Role="JDJS_WMS_Device_Brand_Info" EntitySet="JDJS_WMS_Device_Brand_Info" />
+            <End Role="JDJS_WMS_Device_Type_Info" EntitySet="JDJS_WMS_Device_Type_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JDJS_WMS_Device_ProgState_Info_JDJS_WMS_Device_Info" Association="Self.FK_JDJS_WMS_Device_ProgState_Info_JDJS_WMS_Device_Info">
+            <End Role="JDJS_WMS_Device_Info" EntitySet="JDJS_WMS_Device_Info" />
+            <End Role="JDJS_WMS_Device_ProgState_Info" EntitySet="JDJS_WMS_Device_ProgState_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JDJS_WMS_Device_RealTime_Data_JDJS_WMS_Device_Info" Association="Self.FK_JDJS_WMS_Device_RealTime_Data_JDJS_WMS_Device_Info">
+            <End Role="JDJS_WMS_Device_Info" EntitySet="JDJS_WMS_Device_Info" />
+            <End Role="JDJS_WMS_Device_RealTime_Data" EntitySet="JDJS_WMS_Device_RealTime_Data" />
+          </AssociationSet>
+          <EntitySet Name="JDJS_WMS_Device_Alarm_History_Table" EntityType="Materiel_NoScan_V2Model.JDJS_WMS_Device_Alarm_History_Table" />
+          <AssociationSet Name="FK__JDJS_WMS___CncID__09746778" Association="Materiel_NoScan_V2Model.FK__JDJS_WMS___CncID__09746778">
+            <End Role="JDJS_WMS_Device_Info" EntitySet="JDJS_WMS_Device_Info" />
+            <End Role="JDJS_WMS_Device_Alarm_History_Table" EntitySet="JDJS_WMS_Device_Alarm_History_Table" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="JDJS_WMS_Device_Alarm_History_Table">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CncID" Type="Int32" />
+          <Property Name="ErrCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ErrDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="JDJS_WMS_Device_Info" Relationship="Materiel_NoScan_V2Model.FK__JDJS_WMS___CncID__09746778" FromRole="JDJS_WMS_Device_Alarm_History_Table" ToRole="JDJS_WMS_Device_Info" />
+        </EntityType>
+        <Association Name="FK__JDJS_WMS___CncID__09746778">
+          <End Type="Materiel_NoScan_V2Model.JDJS_WMS_Device_Info" Role="JDJS_WMS_Device_Info" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Materiel_NoScan_V2Model.JDJS_WMS_Device_Alarm_History_Table" Role="JDJS_WMS_Device_Alarm_History_Table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JDJS_WMS_Device_Info">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="JDJS_WMS_Device_Alarm_History_Table">
+              <PropertyRef Name="CncID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Materiel_NoScan_V2ModelStoreContainer" CdmEntityContainer="Materiel_NoScan_V2Entities">
+          <EntitySetMapping Name="JDJS_WMS_Device_Brand_Info">
+            <EntityTypeMapping TypeName="Materiel_NoScan_V2Model.JDJS_WMS_Device_Brand_Info">
+              <MappingFragment StoreEntitySet="JDJS_WMS_Device_Brand_Info">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JDJS_WMS_Device_Info">
+            <EntityTypeMapping TypeName="Materiel_NoScan_V2Model.JDJS_WMS_Device_Info">
+              <MappingFragment StoreEntitySet="JDJS_WMS_Device_Info">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MachNum" ColumnName="MachNum" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="MachState" ColumnName="MachState" />
+                <ScalarProperty Name="MachType" ColumnName="MachType" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JDJS_WMS_Device_ProgState_Info">
+            <EntityTypeMapping TypeName="Materiel_NoScan_V2Model.JDJS_WMS_Device_ProgState_Info">
+              <MappingFragment StoreEntitySet="JDJS_WMS_Device_ProgState_Info">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CncID" ColumnName="CncID" />
+                <ScalarProperty Name="ProgState" ColumnName="ProgState" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JDJS_WMS_Device_RealTime_Data">
+            <EntityTypeMapping TypeName="Materiel_NoScan_V2Model.JDJS_WMS_Device_RealTime_Data">
+              <MappingFragment StoreEntitySet="JDJS_WMS_Device_RealTime_Data">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MachCoord_X" ColumnName="MachCoord_X" />
+                <ScalarProperty Name="MachCoord_Y" ColumnName="MachCoord_Y" />
+                <ScalarProperty Name="MachCoord_Z" ColumnName="MachCoord_Z" />
+                <ScalarProperty Name="MachCoord_A" ColumnName="MachCoord_A" />
+                <ScalarProperty Name="MachCoord_B" ColumnName="MachCoord_B" />
+                <ScalarProperty Name="MachCoord_C" ColumnName="MachCoord_C" />
+                <ScalarProperty Name="AbsCoord_X" ColumnName="AbsCoord_X" />
+                <ScalarProperty Name="AbsCoord_Y" ColumnName="AbsCoord_Y" />
+                <ScalarProperty Name="AbsCoord_Z" ColumnName="AbsCoord_Z" />
+                <ScalarProperty Name="AbsCoord_A" ColumnName="AbsCoord_A" />
+                <ScalarProperty Name="AbsCoord_B" ColumnName="AbsCoord_B" />
+                <ScalarProperty Name="AbsCoord_C" ColumnName="AbsCoord_C" />
+                <ScalarProperty Name="RelCoord_X" ColumnName="RelCoord_X" />
+                <ScalarProperty Name="RelCoord_Y" ColumnName="RelCoord_Y" />
+                <ScalarProperty Name="RelCoord_Z" ColumnName="RelCoord_Z" />
+                <ScalarProperty Name="RelCoord_A" ColumnName="RelCoord_A" />
+                <ScalarProperty Name="RelCoord_B" ColumnName="RelCoord_B" />
+                <ScalarProperty Name="RelCoord_C" ColumnName="RelCoord_C" />
+                <ScalarProperty Name="ProgState" ColumnName="ProgState" />
+                <ScalarProperty Name="CurrWCoord" ColumnName="CurrWCoord" />
+                <ScalarProperty Name="FeedRate" ColumnName="FeedRate" />
+                <ScalarProperty Name="SpindleSpeed" ColumnName="SpindleSpeed" />
+                <ScalarProperty Name="ToolNo" ColumnName="ToolNo" />
+                <ScalarProperty Name="MachTime" ColumnName="MachTime" />
+                <ScalarProperty Name="CurrO" ColumnName="CurrO" />
+                <ScalarProperty Name="CurrOMainO" ColumnName="CurrOMainO" />
+                <ScalarProperty Name="CountNum" ColumnName="CountNum" />
+                <ScalarProperty Name="SpindleRate" ColumnName="SpindleRate" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="SInfo_A" ColumnName="SInfo_A" />
+                <ScalarProperty Name="SInfo_NM" ColumnName="SInfo_NM" />
+                <ScalarProperty Name="SInfo_W" ColumnName="SInfo_W" />
+                <ScalarProperty Name="CurLineNo" ColumnName="CurLineNo" />
+                <ScalarProperty Name="CurLineText" ColumnName="CurLineText" />
+                <ScalarProperty Name="Time_Y" ColumnName="Time_Y" />
+                <ScalarProperty Name="Time_M" ColumnName="Time_M" />
+                <ScalarProperty Name="Time_D" ColumnName="Time_D" />
+                <ScalarProperty Name="Time_H" ColumnName="Time_H" />
+                <ScalarProperty Name="Time_MIT" ColumnName="Time_MIT" />
+                <ScalarProperty Name="Time_S" ColumnName="Time_S" />
+                <ScalarProperty Name="Time_zone" ColumnName="Time_zone" />
+                <ScalarProperty Name="Mode" ColumnName="Mode" />
+                <ScalarProperty Name="CncID" ColumnName="CncID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JDJS_WMS_Device_Type_Info">
+            <EntityTypeMapping TypeName="Materiel_NoScan_V2Model.JDJS_WMS_Device_Type_Info">
+              <MappingFragment StoreEntitySet="JDJS_WMS_Device_Type_Info">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JDJS_WMS_Device_Alarm_History_Table">
+            <EntityTypeMapping TypeName="Materiel_NoScan_V2Model.JDJS_WMS_Device_Alarm_History_Table">
+              <MappingFragment StoreEntitySet="JDJS_WMS_Device_Alarm_History_Table">
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="ErrDesc" ColumnName="ErrDesc" />
+                <ScalarProperty Name="ErrCode" ColumnName="ErrCode" />
+                <ScalarProperty Name="CncID" ColumnName="CncID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
